@@ -55,7 +55,7 @@ var eighthButtonPair2 = buttonList[1];
 
 
 var firstButton = document.getElementById(firstButtonPair1);
-var firstImage = '<img src="../images/' + firstSymbol + '.png" class="buttons"/>';
+var firstImage = '<img src="./images/' + firstSymbol + '.png" class="buttons"/>';
 firstButton.innerHTML = firstImage;
 
 var secondButton = document.getElementById(firstButtonPair2);
@@ -64,7 +64,7 @@ secondButton.innerHTML = firstImage;
 
 
 var thirdButton = document.getElementById(secondButtonPair1);
-var secondImage = '<img src="../images/' + secondSymbol + '.png" class="buttons"/>';
+var secondImage = '<img src="./images/' + secondSymbol + '.png" class="buttons"/>';
 thirdButton.innerHTML = secondImage;
 
 var fourthButton = document.getElementById(secondButtonPair2);
@@ -73,7 +73,7 @@ fourthButton.innerHTML = secondImage;
 
 
 var fifthButton = document.getElementById(thirdButtonPair1);
-var thirdImage = '<img src="../images/' + thirdSymbol + '.png" class="buttons"/>';
+var thirdImage = '<img src="./images/' + thirdSymbol + '.png" class="buttons"/>';
 fifthButton.innerHTML = thirdImage;
 
 var sixthButton = document.getElementById(thirdButtonPair2);
@@ -82,7 +82,7 @@ sixthButton.innerHTML = thirdImage;
 
 
 var seventhButton = document.getElementById(fourthButtonPair1);
-var fourthImage = '<img src="../images/' + fourthSymbol + '.png" class="buttons"/>';
+var fourthImage = '<img src="./images/' + fourthSymbol + '.png" class="buttons"/>';
 seventhButton.innerHTML = fourthImage;
 
 var eighthButton = document.getElementById(fourthButtonPair2);
@@ -91,7 +91,7 @@ eighthButton.innerHTML = fourthImage;
 
 
 var ninthButton = document.getElementById(fifthButtonPair1);
-var fifthImage = '<img src="../images/' + fifthSymbol + '.png" class="buttons"/>';
+var fifthImage = '<img src="./images/' + fifthSymbol + '.png" class="buttons"/>';
 ninthButton.innerHTML = fifthImage;
 
 var tenthButton = document.getElementById(fifthButtonPair2);
@@ -100,7 +100,7 @@ tenthButton.innerHTML = fifthImage;
 
 
 var eleventhButton = document.getElementById(sixthButtonPair1);
-var sixthImage = '<img src="../images/' + sixthSymbol + '.png" class="buttons"/>';
+var sixthImage = '<img src="./images/' + sixthSymbol + '.png" class="buttons"/>';
 eleventhButton.innerHTML = sixthImage;
 
 var twelfthButton = document.getElementById(sixthButtonPair2);
@@ -109,7 +109,7 @@ twelfthButton.innerHTML = sixthImage;
 
 
 var thirteenthButton = document.getElementById(seventhButtonPair1);
-var seventhImage = '<img src="../images/' + seventhSymbol + '.png" class="buttons"/>';
+var seventhImage = '<img src="./images/' + seventhSymbol + '.png" class="buttons"/>';
 thirteenthButton.innerHTML = seventhImage;
 
 var fourteenthButton = document.getElementById(seventhButtonPair2);
@@ -118,7 +118,7 @@ fourteenthButton.innerHTML = seventhImage;
 
 
 var fifteenthButton = document.getElementById(eighthButtonPair1);
-var eighthImage = '<img src="../images/' + eighthSymbol + '.png" class="buttons"/>';
+var eighthImage = '<img src="./images/' + eighthSymbol + '.png" class="buttons"/>';
 fifteenthButton.innerHTML = eighthImage;
 
 var sixteenthButton = document.getElementById(eighthButtonPair2);
