@@ -9,16 +9,7 @@ button{
 }
 
 table{
-    height: 60%;
+    height: 80%;
     width: 90%;
 }
 
-tr{
-    height: 100%;
-    width: 100%;
-}
-
-.buttons{
-    width: 100%;
-    height: 100%;
-}
