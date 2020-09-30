@@ -1,5 +1,18 @@
+button{
+    width: 100%;
+    height: 100%;
+}
+
+#start{
+    height: 3%;
+    width: 16%;
+}
+
+table{
+    height: 60%;
+    width: 90%;
+}
+
 .buttons{
-    background-color:white;
-    height: 20%;
-    width: 20%;
+    background-color: blue;
 }

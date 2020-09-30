@@ -53,6 +53,10 @@ var eighthButtonPair1 = buttonList[0];
 var eighthButtonPair2 = buttonList[1];
 
 
+var usedButtons = [firstButtonPair1, firstButtonPair2, secondButtonPair1, secondButtonPair2, thirdButtonPair1, thirdButtonPair2,
+	 fourthButtonPair1, fourthButtonPair2, fifthButtonPair1, fifthButtonPair2, sixthButtonPair1, sixthButtonPair2, seventhButtonPair1, 
+	seventhButtonPair2, eighthButtonPair1, eighthButtonPair2];
+
 
 var firstButton = document.getElementById(firstButtonPair1);
 var firstImage = '<img src="./images/' + firstSymbol + '.png" class="buttons"/>';
@@ -126,6 +130,16 @@ sixteenthButton.innerHTML = eighthImage;
 
 
 
+var buttonsFinalized = [firstButton, secondButton, thirdButton, fourthButton, fifthButton, sixthButton, seventhButton, eighthButton,
+ninthButton, tenthButton, eleventhButton, twelfthButton, thirteenthButton, fourteenthButton, fifteenthButton, sixteenthButton];
+
+var imageStorage = []
+
+for(var i = 0; i < buttonsFinalized.length; i++){
+	buttonsFinalized[i].disabled = true;
+	imageStorage[i] = buttonsFinalized[i].innerHTML;
+	buttonsFinalized[i].innerHTML = '<img src="js.png" class="buttons"/>';
+}
 
 var seconds = 0;
 var minutes = 0;
@@ -143,5 +157,461 @@ function timer() {
 	}, 1000);
 }
 
-timer();
+document.getElementById("start").addEventListener(("click"), function(){
+	for(var j = 0; j < buttonsFinalized.length; j++){
+		buttonsFinalized[j].disabled = false;
+	}
+	timer();
+});
+
+
+
+var clickedButtons = [];
+var completedButtons = []
+
+document.getElementById(usedButtons[0]).addEventListener("click", function(){
+	this.disabled = true;
+	this.innerHTML = imageStorage[0];
+		
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[0]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[0]).innerHTML){
+			document.getElementById(usedButtons[0]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[0]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[0]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+
+document.getElementById(usedButtons[1]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[1];
+	this.disabled = true;
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[1]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[1]).innerHTML){
+			document.getElementById(usedButtons[1]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[1]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[1]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+
+document.getElementById(usedButtons[2]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[2];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[2]);
+		
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[2]).innerHTML){
+			document.getElementById(usedButtons[2]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[2]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[2]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[3]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[3];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[3]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[3]).innerHTML){
+			document.getElementById(usedButtons[3]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[3]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[3]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[4]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[4];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[4]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[4]).innerHTML){
+			document.getElementById(usedButtons[4]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[4]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[4]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[5]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[5];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[5]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[5]).innerHTML){
+			document.getElementById(usedButtons[5]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[5]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[5]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[6]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[6];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[6]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[6]).innerHTML){
+			document.getElementById(usedButtons[6]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[6]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[6]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[7]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[7];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[7]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[7]).innerHTML){
+			document.getElementById(usedButtons[7]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[7]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[7]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[8]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[8];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[8]);
+
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[8]).innerHTML){
+			document.getElementById(usedButtons[8]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[8]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[8]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[9]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[9];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[9]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[9]).innerHTML){
+			document.getElementById(usedButtons[9]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[9]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[9]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[10]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[10];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[10]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[10]).innerHTML){
+			document.getElementById(usedButtons[10]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[10]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[10]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[11]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[11];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[11]);
+		
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[11]).innerHTML){
+			document.getElementById(usedButtons[11]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[11]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[11]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[12]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[12];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[12]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[12]).innerHTML){
+			document.getElementById(usedButtons[12]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[12]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[12]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[13]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[13];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[13]);
+		
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[13]).innerHTML){
+			document.getElementById(usedButtons[13]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[13]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[13]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[14]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[14];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[14]);
+		 
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[14]).innerHTML){
+			document.getElementById(usedButtons[14]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[14]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[14]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+document.getElementById(usedButtons[15]).addEventListener("click", function(){
+	this.innerHTML = imageStorage[15];
+	if(clickedButtons.length == 0){
+		clickedButtons[0] = document.getElementById(usedButtons[15]);
+	}
+	else{
+		if(clickedButtons[0].innerHTML ==  document.getElementById(usedButtons[15]).innerHTML){
+			document.getElementById(usedButtons[15]).style.backgroundColor = "green";
+			clickedButtons[0].style.backgroundColor = "green";
+			clickedButtons[0].disabled = true;
+			completedButtons.push(clickedButtons[0]);
+			completedButtons.push(document.getElementById(usedButtons[15]));
+			clickedButtons = [];
+			if(completedButtons.length == 16){
+				alert("you win!");
+			}
+		}
+		else{
+			document.getElementById(usedButtons[15]).style.backgroundColor = "red";
+			clickedButtons[0].style.backgroundColor = "red";
+			this.disabled = false;
+			clickedButtons[0].disabled = false;
+			clickedButtons = [];
+		}
+	}
+});
+
+
+
+
 
