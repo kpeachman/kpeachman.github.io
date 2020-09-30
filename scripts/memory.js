@@ -138,7 +138,7 @@ var imageStorage = []
 for(var i = 0; i < buttonsFinalized.length; i++){
 	buttonsFinalized[i].disabled = true;
 	imageStorage[i] = buttonsFinalized[i].innerHTML;
-	buttonsFinalized[i].innerHTML = '<img src="js.png" class="buttons"/>';
+	buttonsFinalized[i].innerHTML = '<img src="./images/js.png" class="buttons"/>';
 }
 
 var seconds = 0;
