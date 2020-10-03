@@ -13,3 +13,12 @@ table{
     width: 90%;
 }
 
+#usernameEnter{
+    height: 3%;
+    width: 16%;
+}
+
+#replayButton{
+    height: 3%;
+    width: 16%;
+}

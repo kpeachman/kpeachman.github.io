@@ -196,7 +196,7 @@ var buttonsFinalized = [
     sixteenthButton
 ];
 
-var imageStorage = []
+var imageStorage = [];
 
 for (var i = 0; i < buttonsFinalized.length; i++) {
     buttonsFinalized[i].disabled = true;
@@ -206,11 +206,13 @@ for (var i = 0; i < buttonsFinalized.length; i++) {
 
 var seconds = 0;
 var minutes = 0;
-
+var score = 0;
+var time;
 
 function timer() { // Update the count every 1 second
     time = setInterval(function () {
         seconds++;
+        score++;
         if (seconds === 60) {
             minutes++;
             seconds = 0;
@@ -221,6 +223,7 @@ function timer() { // Update the count every 1 second
 }
 
 document.getElementById("start").addEventListener(("click"), function () {
+    this.disabled = true;
     for (var j = 0; j < buttonsFinalized.length; j++) {
         buttonsFinalized[j].disabled = false;
     }
@@ -232,21 +235,29 @@ var clickedButtons = [];
 var completedButtons = [];
 
 
-let animationTimer = function (i, start, clickedButton) {
-    for(k = 0; k < usedButtons.length; k++){
-        usedButtons[k].disabled = true;
+let incorrectGuess = function (i, start, clickedButton) {
+    for(var k = 0; k < usedButtons.length; k++){
+        document.getElementById(usedButtons[k]).disabled = true;
     }
     let x = setInterval(function () {
         let timePassed = Date.now() - start;
         if (timePassed >= 2000) {
             clearInterval(x);
-            document.getElementById(usedButtons[i]).innerHTML = "";
-            clickedButton.innerHTML = "";
+            document.getElementById(usedButtons[i]).innerHTML = '<img src="./images/js.png" class="buttons"/>';
+            clickedButton.innerHTML = '<img src="./images/js.png" class="buttons"/>';
             document.getElementById(usedButtons[i]).style.backgroundColor = "";
             clickedButton.style.backgroundColor = "";
             clickedButtons = [];
             document.getElementById(usedButtons[i]).disabled = false;
             clickedButton.disabled = false;
+            for(var t = 0; t < usedButtons.length; t++){
+                if(document.getElementById(usedButtons[t]).style.backgroundColor == "green"){
+                    document.getElementById(usedButtons[t]).disabled = true;
+                }
+                else{
+                    document.getElementById(usedButtons[t]).disabled = false
+                }
+            }
             return;
         }
         document.getElementById(usedButtons[i]).style.backgroundColor = "red";
@@ -254,6 +265,46 @@ let animationTimer = function (i, start, clickedButton) {
         document.getElementById(usedButtons[i]).disabled = false;
         clickedButton.disabled = false;
     }, 100);
+};
+
+
+let youWin = function (){
+    clearInterval(time);
+    var username = document.createElement("input");
+    var usernameEnter = document.createElement("button");
+    var label = document.createElement("Label");
+    label.innerHTML = "Enter your username to add to high score list:";
+    username.setAttribute("type", "text");
+    username.setAttribute("id", "username");
+    usernameEnter.setAttribute("id", "usernameEnter");
+    usernameEnter.innerHTML = "Enter";
+    var game = document.getElementById("game");
+    game.innerHTML = "";
+    game.appendChild(label);
+    game.appendChild(username);
+    game.appendChild(usernameEnter);
+    document.getElementById("usernameEnter").addEventListener("click", function(){
+        let highScoreUsername = document.getElementById("username").value;
+        let key = firebase.database().ref('High Scores').push();
+        key.set({highScoreUsername, score});
+        var dbRef = firebase.database().ref('High Scores').orderByChild('score').limitToLast(20);
+        game.innerHTML = "";
+        game.append(document.createElement("br"));
+        var title = document.createElement("h1");
+        title.innerHTML = "High Scores";
+        game.append(title);
+        dbRef.on("value", function(snapshot) {
+            snapshot.forEach(function(child){
+                game.appendChild(document.createTextNode(child.val().highScoreUsername + ": " + child.val().score + " seconds" ));
+                game.appendChild(document.createElement("br"));
+            });
+            var replay = document.createElement("button");
+            replay.setAttribute("id", "replayButton");
+            replay.setAttribute("onClick", "window.location.reload();");
+            replay.innerHTML = "Click to replay";
+            game.appendChild(replay);
+        });
+    });
 };
 
 document.getElementById(usedButtons[0]).addEventListener("click", function () {
@@ -270,9 +321,11 @@ document.getElementById(usedButtons[0]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(0, Date.now(), clickedButtons[0]);
+            incorrectGuess(0, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -290,9 +343,11 @@ document.getElementById(usedButtons[1]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(1, Date.now(), clickedButtons[0]);
+            incorrectGuess(1, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -310,9 +365,11 @@ document.getElementById(usedButtons[2]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(2, Date.now(), clickedButtons[0]);
+            incorrectGuess(2, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -330,9 +387,11 @@ document.getElementById(usedButtons[3]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(3, Date.now(), clickedButtons[0]);
+            incorrectGuess(3, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -350,9 +409,11 @@ document.getElementById(usedButtons[4]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(4, Date.now(), clickedButtons[0]);
+            incorrectGuess(4, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -370,9 +431,11 @@ document.getElementById(usedButtons[5]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(5, Date.now(), clickedButtons[0]);
+            incorrectGuess(5, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -390,9 +453,11 @@ document.getElementById(usedButtons[6]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(6, Date.now(), clickedButtons[0]);
+            incorrectGuess(6, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -410,9 +475,11 @@ document.getElementById(usedButtons[7]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(7, Date.now(), clickedButtons[0]);
+            incorrectGuess(7, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -430,9 +497,11 @@ document.getElementById(usedButtons[8]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(8, Date.now(), clickedButtons[0]);
+            incorrectGuess(8, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -450,9 +519,11 @@ document.getElementById(usedButtons[9]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(9, Date.now(), clickedButtons[0]);
+            incorrectGuess(9, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -470,9 +541,11 @@ document.getElementById(usedButtons[10]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(10, Date.now(), clickedButtons[0]);
+            incorrectGuess(10, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -490,9 +563,11 @@ document.getElementById(usedButtons[11]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(11, Date.now(), clickedButtons[0]);
+            incorrectGuess(11, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -510,9 +585,11 @@ document.getElementById(usedButtons[12]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(12, Date.now(), clickedButtons[0]);
+            incorrectGuess(12, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -530,9 +607,11 @@ document.getElementById(usedButtons[13]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(13, Date.now(), clickedButtons[0]);
+            incorrectGuess(13, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -550,9 +629,11 @@ document.getElementById(usedButtons[14]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(14, Date.now(), clickedButtons[0]);
+            incorrectGuess(14, Date.now(), clickedButtons[0]);
         }
     }
 });
@@ -570,9 +651,11 @@ document.getElementById(usedButtons[15]).addEventListener("click", function () {
             completedButtons.push(clickedButtons[0]);
             completedButtons.push(this);
             clickedButtons = [];
-            if (completedButtons.length == 16) {}
+            if (completedButtons.length == 16) {
+                youWin();
+            }
         } else {
-            animationTimer(15, Date.now(), clickedButtons[0]);
+            incorrectGuess(15, Date.now(), clickedButtons[0]);
         }
     }
 });
