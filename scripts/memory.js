@@ -241,7 +241,7 @@ let incorrectGuess = function (i, start, clickedButton) {
     }
     let x = setInterval(function () {
         let timePassed = Date.now() - start;
-        if (timePassed >= 2000) {
+        if (timePassed >= 1000) {
             clearInterval(x);
             document.getElementById(usedButtons[i]).innerHTML = '<img src="./images/happy.png" class="buttonImages"/>';
             clickedButton.innerHTML = '<img src="./images/happy.png" class="buttonImages"/>';
