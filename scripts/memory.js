@@ -111,6 +111,8 @@ let youWin = function (){
     // access database on click
     document.getElementById("usernameEnter").addEventListener("click", function(){
         // push high score to database
+        game.innerHTML = "";
+        game.outerHTML = "";
         let highScoreUsername = document.getElementById("username").value;
         let key = firebase.database().ref('High Scores').push();
         key.set({highScoreUsername, score});
