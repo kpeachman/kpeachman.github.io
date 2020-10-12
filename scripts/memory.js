@@ -96,7 +96,7 @@ let youWin = function (){
     var username = document.createElement("input");
     var usernameEnter = document.createElement("button");
     var label = document.createElement("Label");
-    label.innerHTML = "Enter your username to add to high score list:";
+    label.innerHTML = "Enter your username to add to high score list: ";
     username.setAttribute("type", "text");
     username.setAttribute("id", "username");
     usernameEnter.setAttribute("id", "usernameEnter");
@@ -140,7 +140,6 @@ let youWin = function (){
         });
     });
 };
-
 
 // list of all possible symbols that can enter the game
 var possibleSymbols = [
