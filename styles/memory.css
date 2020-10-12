@@ -29,3 +29,11 @@
     left: 25%;
     width: 40vw;
 }
+
+.hidden{
+    display: none;
+}
+
+.showing{
+    display: "";
+}
