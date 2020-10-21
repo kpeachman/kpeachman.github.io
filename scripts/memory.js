@@ -47,10 +47,8 @@ document.getElementById("start").addEventListener(("click"), function () {
 
 // when you make a mistake and miss a match
 
-let incorrectGuess = function (i, start, clickedButton) {
-
-    // disable all of the buttons
-    for(var k = 0; k < buttonsFinalized.length; k++){
+let incorrectGuess = function (i, start, clickedButton) { // disable all of the buttons
+    for (var k = 0; k < buttonsFinalized.length; k++) {
         buttonsFinalized[k].disabled = true;
     }
 
@@ -68,11 +66,10 @@ let incorrectGuess = function (i, start, clickedButton) {
             clickedButtons = [];
             buttonsFinalized[i].disabled = false;
             clickedButton.disabled = false;
-            for(var t = 0; t < buttonsFinalized.length; t++){
-                if(buttonsFinalized[t].style.backgroundColor == "green"){
+            for (var t = 0; t < buttonsFinalized.length; t++) {
+                if (buttonsFinalized[t].style.backgroundColor == "green") {
                     buttonsFinalized[t].disabled = true;
-                }
-                else{
+                } else {
                     buttonsFinalized[t].disabled = false
                 }
             }
@@ -88,8 +85,7 @@ let incorrectGuess = function (i, start, clickedButton) {
 
 
 // after you win the game you add your name to the high score list to see if you make it
-let youWin = function (){
-    // stop timer
+let youWin = function () { // stop timer
     clearInterval(time);
 
     // create high score screen
@@ -109,34 +105,37 @@ let youWin = function (){
 
 
     // access database on click
-    document.getElementById("usernameEnter").addEventListener("click", function(){
-        // push high score to database
+    document.getElementById("usernameEnter").addEventListener("click", function () { // push high score to database
         let highScoreUsername = document.getElementById("username").value;
         let key = firebase.database().ref('High Scores').push();
         key.set({highScoreUsername, score});
 
         // get top 20 scores
-        var dbRef = firebase.database().ref('High Scores').orderByChild('score').limitToLast(20);
+        var dbRef = firebase.database().ref('High Scores').orderByChild('score');
         game.innerHTML = "";
         game.append(document.createElement("br"));
         var title = document.createElement("h1");
         title.innerHTML = "High Scores";
         game.append(title);
 
-        // for each high score
-        dbRef.on("value", function(snapshot) {
-            // add high score to screen
-            snapshot.forEach(function(child){
-                game.appendChild(document.createTextNode(child.val().highScoreUsername + ": " + child.val().score + " seconds" ));
-                game.appendChild(document.createElement("br"));
-            });
+        var replay = document.createElement("button");
+        replay.setAttribute("id", "replayButton");
+        replay.setAttribute("onClick", "window.location.reload();");
+        replay.innerHTML = "Click to replay";
+        game.appendChild(replay);
+        game.append(document.createElement("br"));
 
-            // button to replay game
-            var replay = document.createElement("button");
-            replay.setAttribute("id", "replayButton");
-            replay.setAttribute("onClick", "window.location.reload();");
-            replay.innerHTML = "Click to replay";
-            game.appendChild(replay);
+      
+        // for each high score
+        dbRef.on("value", function (snapshot) {
+
+            // add high score to screen
+                snapshot.forEach(function (child) {
+                    game.appendChild(document.createTextNode(child.val().highScoreUsername + ": " + child.val().score + " seconds"));
+                    game.appendChild(document.createElement("br"));
+                    i++;
+                });
+
         });
     });
 };
@@ -172,13 +171,18 @@ var possibleSymbols = [
 
 
 // list of buttons in our first game
-var buttonListGame1 = [
-    "button1", "button2", "button3", "button4"
-];
+var buttonListGame1 = ["button1", "button2", "button3", "button4"];
 
 // second game
 var buttonListGame2 = [
-    "game2Button1", "game2Button2", "game2Button3", "game2Button4", "game2Button5", "game2Button6", "game2Button7", "game2Button8"
+    "game2Button1",
+    "game2Button2",
+    "game2Button3",
+    "game2Button4",
+    "game2Button5",
+    "game2Button6",
+    "game2Button7",
+    "game2Button8"
 ];
 
 // third game
@@ -232,29 +236,22 @@ var fourthButton = document.getElementById(secondButtonPair2);
 fourthButton.innerHTML = secondImage;
 
 // the buttons have everything they need
-var buttonsFinalized = [
-    firstButton,
-    secondButton,
-    thirdButton,
-    fourthButton,
-];
+var buttonsFinalized = [firstButton, secondButton, thirdButton, fourthButton,];
 
 // this will serve as temporary storage for each button
 // will help display image when clicked
 var imageStorage = [];
 
 // for every button
-for (var i = 0; i < buttonsFinalized.length; i++) {
-    // disable (at start)
+for (var i = 0; i < buttonsFinalized.length; i++) { // disable (at start)
     buttonsFinalized[i].disabled = true;
     // store its image at the appropriate index
     imageStorage[i] = buttonsFinalized[i].innerHTML;
-    //now that image is stored, change to generic image
+    // now that image is stored, change to generic image
     buttonsFinalized[i].innerHTML = '<img src="./images/happy.png" class="buttonImages"/>';
 };
 
-buttonsFinalized[0].addEventListener("click", function () {
-    // after being clicked, it can't be clicked anymore
+buttonsFinalized[0].addEventListener("click", function () { // after being clicked, it can't be clicked anymore
     this.disabled = true;
     // change the image from generic to symbol
     this.innerHTML = imageStorage[0];
@@ -262,8 +259,7 @@ buttonsFinalized[0].addEventListener("click", function () {
     // if nothing else has been clicked
     if (clickedButtons.length == 0) {
         clickedButtons[0] = this;
-    } else {
-        // if it matches the button that has been clicked
+    } else { // if it matches the button that has been clicked
         if (clickedButtons[0].innerHTML == this.innerHTML) {
             // change the background to green
             // disable both buttons and add
@@ -280,8 +276,7 @@ buttonsFinalized[0].addEventListener("click", function () {
             if (completedButtons.length == 4) {
                 game2Start();
             }
-        } else {
-            // call incorrect guess function if buttons don't match
+        } else { // call incorrect guess function if buttons don't match
             incorrectGuess(0, Date.now(), clickedButtons[0]);
         }
     }
@@ -354,8 +349,7 @@ buttonsFinalized[3].addEventListener("click", function () {
 });
 
 
-let game2Start = function(){
-    // clear out all arrays
+let game2Start = function () { // clear out all arrays
     clickedButtons = [];
     completedButtons = [];
     buttonsFinalized = [];
@@ -421,21 +415,22 @@ let game2Start = function(){
 
 
     // get finalized buttons
-    buttonsFinalized = [firstButton,
+    buttonsFinalized = [
+        firstButton,
         secondButton,
         thirdButton,
         fourthButton,
         fifthButton,
         sixthButton,
         seventhButton,
-        eighthButton];
+        eighthButton
+    ];
 
     // clear image storage
     imageStorage = [];
 
     // for all buttons
-    for (var i = 0; i < buttonsFinalized.length; i++) {
-        // store symbol, in order to change image to generic image until clicked
+    for (var i = 0; i < buttonsFinalized.length; i++) { // store symbol, in order to change image to generic image until clicked
         imageStorage[i] = buttonsFinalized[i].innerHTML;
         buttonsFinalized[i].innerHTML = '<img src="./images/happy.png" class="buttonImages"/>';
     };
@@ -447,18 +442,16 @@ let game2Start = function(){
 
 
 // button creation for game 2. buttons behave in same way as game1
-let createGame2Buttons = function(){
+let createGame2Buttons = function () {
 
-    buttonsFinalized[0].addEventListener("click", function () {
-        // disable button when clicked and draw its symbol
+    buttonsFinalized[0].addEventListener("click", function () { // disable button when clicked and draw its symbol
         this.disabled = true;
         this.innerHTML = imageStorage[0];
-        
+
         // if only button clicked add it to list of clicked buttons
         if (clickedButtons.length == 0) {
             clickedButtons[0] = this;
-        } else {
-            // does it match other clicked button
+        } else { // does it match other clicked button
             if (clickedButtons[0].innerHTML == this.innerHTML) {
                 // it does, change style to green, disable both buttons
                 // and add to completed buttons list
@@ -477,7 +470,7 @@ let createGame2Buttons = function(){
             }
         }
     });
-    
+
     buttonsFinalized[1].addEventListener("click", function () {
         this.disabled = true;
         this.innerHTML = imageStorage[1];
@@ -499,7 +492,7 @@ let createGame2Buttons = function(){
             }
         }
     });
-    
+
     buttonsFinalized[2].addEventListener("click", function () {
         this.disabled = true;
         this.innerHTML = imageStorage[2];
@@ -521,7 +514,7 @@ let createGame2Buttons = function(){
             }
         }
     });
-    
+
     buttonsFinalized[3].addEventListener("click", function () {
         this.disabled = true;
         this.innerHTML = imageStorage[3];
@@ -543,7 +536,7 @@ let createGame2Buttons = function(){
             }
         }
     });
-    
+
     buttonsFinalized[4].addEventListener("click", function () {
         this.disabled = true;
         this.innerHTML = imageStorage[4];
@@ -565,7 +558,7 @@ let createGame2Buttons = function(){
             }
         }
     });
-    
+
     buttonsFinalized[5].addEventListener("click", function () {
         this.disabled = true;
         this.innerHTML = imageStorage[5];
@@ -587,7 +580,7 @@ let createGame2Buttons = function(){
             }
         }
     });
-    
+
     buttonsFinalized[6].addEventListener("click", function () {
         this.disabled = true;
         this.innerHTML = imageStorage[6];
@@ -609,7 +602,7 @@ let createGame2Buttons = function(){
             }
         }
     });
-    
+
     buttonsFinalized[7].addEventListener("click", function () {
         this.disabled = true;
         this.innerHTML = imageStorage[7];
@@ -634,8 +627,7 @@ let createGame2Buttons = function(){
 };
 
 // function to handle third and final game
-let createGame3 = function(){
-    // clear out arrays
+let createGame3 = function () { // clear out arrays
     clickedButtons = [];
     completedButtons = [];
     buttonsFinalized = [];
@@ -782,20 +774,18 @@ let createGame3 = function(){
 }
 
 // buttons for the third game, behave in same way as first and second
-function createGame3Buttons(){
-    
-    buttonsFinalized[0].addEventListener("click", function () {
-        // disable button when clicked, draw symbol associated with button
+function createGame3Buttons() {
+
+    buttonsFinalized[0].addEventListener("click", function () { // disable button when clicked, draw symbol associated with button
         this.disabled = true;
         this.innerHTML = imageStorage[0];
 
         // if button is the only one clicked add it to clicked list
         if (clickedButtons.length == 0) {
             clickedButtons[0] = this;
-        } else {
-            // if clicked buttons match
+        } else { // if clicked buttons match
             if (clickedButtons[0].innerHTML == this.innerHTML) {
-                // change background to green, make them unclickable, 
+                // change background to green, make them unclickable,
                 // and push buttons to completed list
                 this.style.backgroundColor = "green";
                 clickedButtons[0].style.backgroundColor = "green";
@@ -808,8 +798,7 @@ function createGame3Buttons(){
                 if (completedButtons.length == 16) {
                     youWin();
                 }
-            } else {
-                // call incorrect guess function
+            } else { // call incorrect guess function
                 incorrectGuess(0, Date.now(), clickedButtons[0]);
             }
         }
